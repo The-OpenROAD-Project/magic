@@ -13,8 +13,9 @@
 
 TKCON=true
 DNULL=
-MAGIC_WISH=WISH_EXE
+MAGIC_WISH=$OPENROAD/bin/Linux-x86_64/wish8.6
 export MAGIC_WISH
+export CAD_ROOT=$OPENROAD/lib
 
 # Hacks for Cygwin
 if [ "`uname | cut -d_ -f1`" = "CYGWIN" ]; then
@@ -37,12 +38,12 @@ done
 if [ $TKCON ]; then
 
    if [ $DNULL ]; then
-      exec TCL_DIR/tkcon.tcl -eval "source TCL_DIR/console.tcl" \
-	   -slave "set argc $#; set argv [list $*]; source TCL_DIR/magic.tcl"
+      exec $OPENROAD/lib/magic/tcl/tkcon.tcl -eval "source $::env(OPENROAD)/lib/magic/tcl/console.tcl" \
+	   -slave "set argc $#; set argv [list $*]; source $::env(OPENROAD)/lib/magic/tcl/magic.tcl"
    else
-      exec TCL_DIR/tkcon.tcl -eval "source TCL_DIR/console.tcl" \
+      exec $OPENROAD/lib/magic/tcl/tkcon.tcl -eval "source $::env(OPENROAD)/lib/magic/tcl/console.tcl" \
 	   -slave "package require Tk; set argc $#; set argv [list $arglist]; \
-	   source TCL_DIR/magic.tcl"
+	   source $::env(OPENROAD)/lib/magic/tcl/magic.tcl"
    fi
 
 else
@@ -57,8 +58,8 @@ else
 # only, efficient for running in batch mode).
 #
    if [ $DNULL ]; then
-      exec TCL_DIR/magicdnull -nowrapper "$@"
+      exec $OPENROAD/lib/magic/tcl/magicdnull -nowrapper "$@"
    else
-      exec TCL_DIR/magicexec -- "$@"
+      exec $OPENROAD/lib/magic/tcl/magicexec -- "$@"
    fi
 fi

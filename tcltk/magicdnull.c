@@ -10,6 +10,8 @@
 #include <stdio.h>
 
 #include <tcl.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*----------------------------------------------------------------------*/
 /* Application initiation.  This is exactly like the AppInit routine	*/
@@ -29,7 +31,13 @@ magic_AppInit(interp)
     /* This is where we replace the home ".tclshrc" file with	*/
     /* magic's startup script.					*/
 
-    Tcl_SetVar(interp, "tcl_rcFileName", TCL_DIR "/magic.tcl", TCL_GLOBAL_ONLY);
+    char *path,*rel;
+    path = getenv("OPENROAD");
+    rel = "/lib/magic/tcl/magic.tcl";
+    strcat(path,rel);
+
+    Tcl_SetVar(interp, "tcl_rcFileName", path, TCL_GLOBAL_ONLY);
+    // Tcl_SetVar(interp, "tcl_rcFileName", TCL_DIR "/magic.tcl", TCL_GLOBAL_ONLY);
 
     /* Additional variable can be used to tell if magic is in batch mode */
     Tcl_SetVar(interp, "batch_mode", "true", TCL_GLOBAL_ONLY);

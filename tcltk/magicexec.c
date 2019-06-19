@@ -36,6 +36,8 @@
 
 #include <tk.h>
 #include <tcl.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*----------------------------------------------------------------------*/
 /* Application initiation.  This is exactly like the AppInit routine	*/
@@ -59,7 +61,13 @@ magic_AppInit(interp)
     /* This is where we replace the home ".wishrc" file with	*/
     /* magic's startup script.					*/
 
-    Tcl_SetVar(interp, "tcl_rcFileName", TCL_DIR "/magic.tcl", TCL_GLOBAL_ONLY);
+    char *path,*rel;
+    path = getenv("OPENROAD");
+    rel = "/lib/magic/tcl/magic.tcl";
+    strcat(path,rel);
+
+    Tcl_SetVar(interp, "tcl_rcFileName", path, TCL_GLOBAL_ONLY);
+    // Tcl_SetVar(interp, "tcl_rcFileName", TCL_DIR "/magic.tcl", TCL_GLOBAL_ONLY);
     return TCL_OK;
 }
 
