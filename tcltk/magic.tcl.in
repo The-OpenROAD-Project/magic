@@ -11,9 +11,11 @@ global Opts
 # the environment variable HOME to its original value.
 
 if {${tcl_version} >= 8.6} {
-   load -lazy $::env(OPENROAD)/lib/magic/tcl/tclmagicSHDLIB_EXT
+   # load -lazy $::env(OPENROAD)/lib/magic/tcl/tclmagicSHDLIB_EXT
+   load -lazy [file dirname [file dirname [file dirname [file dirname $::env(OPENROAD)]]]]/lib/magic/tcl/tclmagicSHDLIB_EXT
 } else {
-   load $::env(OPENROAD)/lib/magic/tcl/tclmagicSHDLIB_EXT
+   # load $::env(OPENROAD)/lib/magic/tcl/tclmagicSHDLIB_EXT
+   load [file dirname [file dirname [file dirname [file dirname $::env(OPENROAD)]]]]/lib/magic/tcl/tclmagicSHDLIB_EXT
 }
 
 # It is important to make sure no magic commands overlap with Tcl built-in
