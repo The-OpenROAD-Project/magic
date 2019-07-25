@@ -13,7 +13,7 @@
 
 TKCON=true
 DNULL=
-MAGIC_WISH=$OPENROAD/bin/Linux-x86_64/wish8.6
+MAGIC_WISH=`which wish`
 export MAGIC_WISH
 export CAD_ROOT=$OPENROAD/lib
 
