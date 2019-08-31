@@ -1,0 +1,19 @@
+.git
+.gitignore
+Dockerfile
+
+# from .gitignore
+defs.mak
+Depend
+config.cache
+config.log
+scripts/config.log
+scripts/config.status
+scripts/defs.mak
+.*.swp
+*.o
+*.so
+*~
+scmos/cif_template/objs/*
+UPDATE_ME
+VERSION
